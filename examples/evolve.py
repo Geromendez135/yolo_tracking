@@ -25,8 +25,8 @@ ROOT = FILE.parents[0].parents[0]  # examples absolute path
 EXAMPLES = FILE.parents[0]  # examples absolute path
 WEIGHTS = EXAMPLES / 'weights'
 
-from ultralytics.yolo.utils import LOGGER
-from ultralytics.yolo.utils.checks import check_requirements, print_args
+from ultralytics.utils import LOGGER
+from ultralytics.utils.checks import check_requirements, print_args
 from track import run
 
 

@@ -27,9 +27,9 @@ from tqdm import tqdm
 import numpy as np
 from torch.utils.tensorboard import SummaryWriter
 
-from ultralytics.yolo.utils import LOGGER
-from ultralytics.yolo.utils.checks import check_requirements, print_args
-from ultralytics.yolo.utils.files import increment_path
+from ultralytics.utils import LOGGER
+from ultralytics.utils.checks import check_requirements, print_args
+from ultralytics.utils.files import increment_path
 
 from track import run
 

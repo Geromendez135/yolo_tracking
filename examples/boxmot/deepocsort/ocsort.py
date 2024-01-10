@@ -8,7 +8,7 @@ import numpy as np
 from .association import *
 from .cmc import CMCComputer
 from ..deep.reid_multibackend import ReIDDetectMultiBackend
-from ultralytics.yolo.utils.ops import xyxy2xywh
+from ultralytics.utils.ops import xyxy2xywh
 
 
 

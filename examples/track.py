@@ -8,13 +8,14 @@ import cv2
 from types import SimpleNamespace
 
 from boxmot.tracker_zoo import create_tracker
-from ultralytics.yolo.engine.model import YOLO, TASK_MAP
+from ultralytics.models.yolo import YOLO
+# from ultralytics.engine.model import TASK_MAP
 
-from ultralytics.yolo.utils import LOGGER, SETTINGS, colorstr, ops, is_git_dir, IterableSimpleNamespace
-from ultralytics.yolo.utils.checks import check_imgsz, print_args
-from ultralytics.yolo.utils.files import increment_path
-from ultralytics.yolo.engine.results import Boxes
-from ultralytics.yolo.data.utils import VID_FORMATS
+from ultralytics.utils import LOGGER, SETTINGS, colorstr, ops, is_git_dir, IterableSimpleNamespace
+from ultralytics.utils.checks import check_imgsz, print_args
+from ultralytics.utils.files import increment_path
+from ultralytics.engine.results import Boxes
+from ultralytics.data.utils import VID_FORMATS
 
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[0].parents[0]  # repo root absolute path
@@ -62,10 +63,10 @@ def write_MOT_results(txt_path, results, frame_idx, i):
 
 @torch.no_grad()
 def run(args):
-    
     model = YOLO(args['yolo_model'])
     overrides = model.overrides.copy()
-    model.predictor = TASK_MAP[model.task][3](overrides=overrides, _callbacks=model.callbacks)
+    # model.predictor = TASK_MAP[model.task][3](overrides=overrides, _callbacks=model.callbacks)
+    model.predictor = model.task_map[model.task]['predictor'](overrides=overrides, _callbacks=model.callbacks)
     
     # extract task predictor
     predictor = model.predictor

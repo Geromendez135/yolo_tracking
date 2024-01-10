@@ -11,7 +11,7 @@ try:
 
     assert lap.__version__  # verify package is not directory
 except (ImportError, AssertionError, AttributeError):
-    from ultralytics.yolo.utils.checks import check_requirements
+    from ultralytics.utils.checks import check_requirements
 
     check_requirements('lap>=0.4')  # install
     import lap

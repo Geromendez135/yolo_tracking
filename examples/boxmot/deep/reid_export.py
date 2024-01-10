@@ -15,9 +15,9 @@ import logging
 from boxmot.deep.models import build_model
 from boxmot.deep.reid_model_factory import get_model_name, load_pretrained_weights
 
-from ultralytics.yolo.utils.torch_utils import select_device
-from ultralytics.yolo.utils import LOGGER, colorstr, ops
-from ultralytics.yolo.utils.checks import check_requirements, check_version
+from ultralytics.utils.torch_utils import select_device
+from ultralytics.utils import LOGGER, colorstr, ops
+from ultralytics.utils.checks import check_requirements, check_version
 
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[0].parents[0].parents[0]  # root absolute path

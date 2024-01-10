@@ -8,13 +8,13 @@ import cv2
 from types import SimpleNamespace
 
 from boxmot.tracker_zoo import create_tracker
-from ultralytics.yolo.engine.model import YOLO, TASK_MAP
+from ultralytics.models.yolo import YOLO
 
-from ultralytics.yolo.utils import LOGGER, SETTINGS, colorstr, ops, is_git_dir, IterableSimpleNamespace
-from ultralytics.yolo.utils.checks import check_imgsz, print_args
-from ultralytics.yolo.utils.files import increment_path
-from ultralytics.yolo.engine.results import Boxes, Results
-from ultralytics.yolo.data.utils import VID_FORMATS
+from ultralytics.utils import LOGGER, SETTINGS, colorstr, ops, is_git_dir, IterableSimpleNamespace
+from ultralytics.utils.checks import check_imgsz, print_args
+from ultralytics.utils.files import increment_path
+from ultralytics.engine.results import Boxes, Results
+from ultralytics.data.utils import VID_FORMATS
 
 from super_gradients.common.object_names import Models
 from super_gradients.training import models
@@ -29,7 +29,7 @@ WEIGHTS = EXAMPLES / 'weights'
 try:
     import super_gradients  # for linear_assignment
 except (ImportError, AssertionError, AttributeError):
-    from ultralytics.yolo.utils.checks import check_requirements
+    from ultralytics.utils.checks import check_requirements
 
     check_requirements('super_gradients')  # install
     import lap
@@ -75,11 +75,11 @@ def write_MOT_results(txt_path, results, frame_idx, i):
 
 @torch.no_grad()
 def run(args):
-    
     model = YOLO(args['yolo_model'])
     overrides = model.overrides.copy()
-    model.predictor = TASK_MAP[model.task][3](overrides=overrides, _callbacks=model.callbacks)
-    
+    # model.predictor = TASK_MAP[model.task][3](overrides=overrides, _callbacks=model.callbacks)
+    model.predictor = model.task_map['detect']['predictor'](overrides=overrides, _callbacks=model.callbacks)
+
     # extract task predictor
     predictor = model.predictor
 
